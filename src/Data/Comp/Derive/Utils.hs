@@ -70,6 +70,7 @@ normalCon (InfixC a constr b) = (constr, [a,b], Nothing)
 normalCon (ForallC _ _ constr) = normalCon constr
 #if __GLASGOW_HASKELL__ >= 800
 normalCon (GadtC (constr:_) args typ) = (constr,args,Just typ)
+normalCon (RecGadtC (constr:_) args typ) = (constr, map (\(_,s,t) -> (s,t)) args,Just typ)
 #endif
 normalCon _ = error "missing case for 'normalCon'"
 
