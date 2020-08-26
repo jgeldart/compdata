@@ -129,6 +129,7 @@ abstractConType (InfixC _ constr _) = (constr, 2)
 abstractConType (ForallC _ _ constr) = abstractConType constr
 #if __GLASGOW_HASKELL__ >= 800
 abstractConType (GadtC (constr:_) args _typ) = (constr,length args) -- Only first Name
+abstractConType (RecGadtC (constr:_) args _typ) = (constr,length args)
 #endif
 abstractConType _ = error "missing case for 'abstractConType'"
 
